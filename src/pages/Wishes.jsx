@@ -1,333 +1,282 @@
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import Confetti from "react-confetti";
-import Marquee from "@/components/ui/marquee";
+import { MessageCircle, Send, ChevronLeft, ChevronRight } from "lucide-react";
+import { db } from "@/lib/firebase";
 import {
-  Calendar,
-  Clock,
-  ChevronDown,
-  User,
-  MessageCircle,
-  Send,
-  Smile,
-  CheckCircle,
-  XCircle,
-  HelpCircle,
-} from "lucide-react";
-import { useState } from "react";
-import { formatEventDate } from "@/lib/formatEventDate";
+  collection,
+  addDoc,
+  query,
+  orderBy,
+  serverTimestamp,
+  onSnapshot,
+} from "firebase/firestore";
 
 export default function Wishes() {
-  const [showConfetti, setShowConfetti] = useState(false);
-  const [newWish, setNewWish] = useState("");
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [attendance, setAttendance] = useState("");
-  const [isOpen, setIsOpen] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [comments, setComments] = useState([]);
+  const [newComment, setNewComment] = useState("");
+  const [userName, setUserName] = useState("");
+  const [isCommenting, setIsCommenting] = useState(false);
 
-  const options = [
-    { value: "ATTENDING", label: "Иә, мен қатысамын" },
-    { value: "NOT_ATTENDING", label: "Жоқ, мен қатыса алмаймын" },
-    { value: "MAYBE", label: "Мүмкін, кейінірек хабарлаймын" },
-  ];
-  // Example wishes - replace with your actual data
-  const [wishes, setWishes] = useState([
-    {
-      id: 1,
-      name: "Айдар",
-      message: "Бақытты болыңыздар! Махаббаттарыңыз мәңгі болсын! 🎉",
-      timestamp: "2024-12-24T23:20:00Z",
-      attending: "attending",
-    },
-    {
-      id: 2,
-      name: "Айнұр",
-      message: "Құтты болсын! Алла бақыт берсін! 💝",
-      timestamp: "2024-12-24T23:20:00Z",
-      attending: "attending",
-    },
-    {
-      id: 3,
-      name: "Мақсат",
-      message: "Отбасылық өмірлеріңіз баянды болсын! 🤲",
-      timestamp: "2024-12-25T23:08:09Z",
-      attending: "maybe",
-    },
-  ]);
+  // Subscribe to real-time updates
+  useEffect(() => {
+    const q = query(collection(db, "wishes"), orderBy("timestamp", "desc"));
 
-  const handleSubmitWish = async (e) => {
-    e.preventDefault();
-    if (!newWish.trim()) return;
+    const unsubscribe = onSnapshot(q, (snapshot) => {
+      const updatedComments = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      setComments(updatedComments);
+    });
 
-    setIsSubmitting(true);
-    // Simulating API call
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+    return () => unsubscribe();
+  }, []);
 
-    const newWishObj = {
-      id: wishes.length + 1,
-      name: "Guest", // Replace with actual user name
-      message: newWish,
-      attend: "attending",
-      timestamp: new Date().toISOString(),
-    };
-
-    setWishes((prev) => [newWishObj, ...prev]);
-    setNewWish("");
-    setIsSubmitting(false);
-    setShowConfetti(true);
-    setTimeout(() => setShowConfetti(false), 3000);
+  const nextWish = () => {
+    setCurrentIndex((prev) => (prev + 1) % comments.length);
   };
-  const getAttendanceIcon = (status) => {
-    switch (status) {
-      case "attending":
-        return <CheckCircle className="w-4 h-4 text-emerald-500" />;
-      case "not-attending":
-        return <XCircle className="w-4 h-4 text-rose-500" />;
-      case "maybe":
-        return <HelpCircle className="w-4 h-4 text-amber-500" />;
-      default:
-        return null;
+
+  const prevWish = () => {
+    setCurrentIndex((prev) => (prev - 1 + comments.length) % comments.length);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!newComment.trim() || !userName.trim()) {
+      alert("Барлық өрістерді толтырыңыз");
+      return;
+    }
+
+    try {
+      await addDoc(collection(db, "wishes"), {
+        userName: userName.trim(),
+        comment: newComment.trim(),
+        timestamp: serverTimestamp(),
+      });
+
+      // Clear form
+      setNewComment("");
+      setUserName("");
+      setIsCommenting(false);
+    } catch (error) {
+      console.error("Error adding wish:", error);
+      alert("Қате шықты. Қайталап көріңіз.");
     }
   };
-  return (
-    <>
-      <section id="wishes" className="min-h-screen relative overflow-hidden">
-        {showConfetti && <Confetti recycle={false} numberOfPieces={200} />}
-        <div className="container mx-auto px-4 py-20 relative z-10">
-          {/* Section Header */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-center space-y-4 mb-16"
-          >
-            <motion.span
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-              className="inline-block text-rose-500 font-medium"
+
+  const CommentForm = (
+    <motion.form
+      onSubmit={handleSubmit}
+      className="space-y-4 bg-white rounded-xl shadow-sm border border-gray-100"
+    >
+      <div className="p-4 space-y-4">
+        {/* Name Input */}
+        <div className="space-y-2">
+          <div className="flex items-center gap-2 text-gray-600">
+            <svg
+              className="w-5 h-5"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
             >
-              Жақсы тілектеріңізді қалдырыңыз
-            </motion.span>
-
-            <motion.h2
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 }}
-              className="text-4xl md:text-5xl font-serif text-gray-800"
-            >
-              Тілектер мен дұғалар
-            </motion.h2>
-
-            {/* Decorative Divider */}
-            <motion.div
-              initial={{ scale: 0 }}
-              animate={{ scale: 1 }}
-              transition={{ delay: 0.4 }}
-              className="flex items-center justify-center gap-4 pt-4"
-            >
-              <div className="h-[1px] w-12 bg-rose-200" />
-              <MessageCircle className="w-5 h-5 text-rose-400" />
-              <div className="h-[1px] w-12 bg-rose-200" />
-            </motion.div>
-          </motion.div>
-
-          {/* Wishes List */}
-          <div className="max-w-2xl mx-auto space-y-6">
-            <AnimatePresence>
-              <Marquee
-                speed={20}
-                gradient={false}
-                className="[--duration:20s] py-2"
-              >
-                {wishes.map((wish, index) => (
-                  <motion.div
-                    key={wish.id}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -20 }}
-                    transition={{ delay: index * 0.1 }}
-                    className="group relative w-[280px]"
-                  >
-                    {/* Background gradient */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-rose-100/50 to-pink-100/50 rounded-xl transform transition-transform group-hover:scale-[1.02] duration-300" />
-
-                    {/* Card content */}
-                    <div className="relative backdrop-blur-sm bg-white/80 p-4 rounded-xl border border-rose-100/50 shadow-md">
-                      {/* Header */}
-                      <div className="flex items-start space-x-3 mb-2">
-                        {/* Avatar */}
-                        <div className="flex-shrink-0">
-                          <div className="w-8 h-8 rounded-full bg-gradient-to-r from-rose-400 to-pink-400 flex items-center justify-center text-white text-sm font-medium">
-                            {wish.name[0].toUpperCase()}
-                          </div>
-                        </div>
-
-                        {/* Name, Time, and Attendance */}
-                        <div className="flex-1 min-w-0">
-                          <div className="flex items-center space-x-2">
-                            <h4 className="font-medium text-gray-800 text-sm truncate">
-                              {wish.name}
-                            </h4>
-                            {getAttendanceIcon(wish.attending)}
-                          </div>
-                          <div className="flex items-center space-x-1 text-gray-500 text-xs">
-                            <Clock className="w-3 h-3" />
-                            <time className="truncate">
-                              {formatEventDate(wish.timestamp)}
-                            </time>
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* Message */}
-                      <p className="text-gray-600 text-sm leading-relaxed mb-2 line-clamp-3">
-                        {wish.message}
-                      </p>
-
-                      {/* Optional: Time indicator for recent messages */}
-                      {Date.now() - new Date(wish.timestamp).getTime() <
-                        3600000 && (
-                        <div className="absolute top-2 right-2">
-                          <span className="px-2 py-1 rounded-full bg-rose-100 text-rose-600 text-xs font-medium">
-                            Жаңа
-                          </span>
-                        </div>
-                      )}
-                    </div>
-                  </motion.div>
-                ))}
-              </Marquee>
-            </AnimatePresence>
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+              <circle cx="12" cy="7" r="4" />
+            </svg>
+            <span className="text-sm">Сіздің атыңыз</span>
           </div>
-          {/* Wishes Form */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5 }}
-            className="max-w-2xl mx-auto mt-12"
-          >
-            <form onSubmit={handleSubmitWish} className="relative">
-              <div className="backdrop-blur-sm bg-white/80 p-6 rounded-2xl border border-rose-100/50 shadow-lg">
-                <div className="space-y-2">
-                  {/* Name Input */}
-                  <div className="space-y-2">
-                    <div className="flex items-center space-x-2 text-gray-500 text-sm mb-1">
-                      <User className="w-4 h-4" />
-                      <span>Сіздің атыңыз</span>
-                    </div>
-                    <input
-                      type="text"
-                      placeholder="Атыңызды енгізіңіз..."
-                      className="w-full px-4 py-2.5 rounded-xl bg-white/50 border border-rose-100 focus:border-rose-300 focus:ring focus:ring-rose-200 focus:ring-opacity-50 transition-all duration-200 text-gray-700 placeholder-gray-400"
-                      required
-                    />
-                  </div>
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.1 }}
-                    className="space-y-2 relative"
-                  >
-                    <div className="flex items-center space-x-2 text-gray-500 text-sm mb-1">
-                      <Calendar className="w-4 h-4" />
-                      <span>Қатысасыз ба?</span>
-                    </div>
-
-                    {/* Custom Select Button */}
-                    <button
-                      type="button"
-                      onClick={() => setIsOpen(!isOpen)}
-                      className="w-full px-4 py-2.5 rounded-xl bg-white/50 border border-rose-100 focus:border-rose-300 focus:ring focus:ring-rose-200 focus:ring-opacity-50 transition-all duration-200 text-left flex items-center justify-between"
-                    >
-                      <span
-                        className={
-                          attendance ? "text-gray-700" : "text-gray-400"
-                        }
-                      >
-                        {attendance
-                          ? options.find((opt) => opt.value === attendance)
-                              ?.label
-                          : "Қатысуыңызды таңдаңыз..."}
-                      </span>
-                      <ChevronDown
-                        className={`w-5 h-5 text-gray-400 transition-transform duration-200 ${
-                          isOpen ? "transform rotate-180" : ""
-                        }`}
-                      />
-                    </button>
-
-                    {/* Dropdown Options */}
-                    <AnimatePresence>
-                      {isOpen && (
-                        <motion.div
-                          initial={{ opacity: 0, y: -10 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          exit={{ opacity: 0, y: -10 }}
-                          className="absolute z-10 w-full mt-1 bg-white rounded-xl shadow-lg border border-rose-100 overflow-hidden"
-                        >
-                          {options.map((option) => (
-                            <motion.button
-                              key={option.value}
-                              type="button"
-                              onClick={() => {
-                                setAttendance(option.value);
-                                setIsOpen(false);
-                              }}
-                              whileHover={{
-                                backgroundColor: "rgb(255, 241, 242)",
-                              }}
-                              className={`w-full px-4 py-2.5 text-left transition-colors
-                                        ${
-                                          attendance === option.value
-                                            ? "bg-rose-50 text-rose-600"
-                                            : "text-gray-700 hover:bg-rose-50"
-                                        }`}
-                            >
-                              {option.label}
-                            </motion.button>
-                          ))}
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </motion.div>
-                  {/* Wish Textarea */}
-                  <div className="space-y-2">
-                    <div className="flex items-center space-x-2 text-gray-500 text-sm mb-1">
-                      <MessageCircle className="w-4 h-4" />
-                      <span>Тілегіңіз</span>
-                    </div>
-                    <textarea
-                      placeholder="Жас жұптарға тілегіңізді жазыңыз..."
-                      className="w-full h-32 p-4 rounded-xl bg-white/50 border border-rose-100 focus:border-rose-300 focus:ring focus:ring-rose-200 focus:ring-opacity-50 resize-none transition-all duration-200"
-                      required
-                    />
-                  </div>
-                </div>
-                <div className="flex items-center justify-between mt-4">
-                  <div className="flex items-center space-x-2 text-gray-500">
-                    <Smile className="w-5 h-5" />
-                    <span className="text-sm">Тілегіңізді қалдырыңыз</span>
-                  </div>
-                  <motion.button
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    className={`flex items-center space-x-2 px-6 py-2.5 rounded-xl text-white font-medium transition-all duration-200
-                    ${
-                      isSubmitting
-                        ? "bg-gray-300 cursor-not-allowed"
-                        : "bg-rose-500 hover:bg-rose-600"
-                    }`}
-                  >
-                    <Send className="w-4 h-4" />
-                    <span>
-                      {isSubmitting ? "Жіберілуде..." : "Тілек жіберу"}
-                    </span>
-                  </motion.button>
-                </div>
-              </div>
-            </form>
-          </motion.div>
+          <input
+            type="text"
+            value={userName}
+            onChange={(e) => setUserName(e.target.value)}
+            placeholder="Атыңызды енгізіңіз..."
+            className="w-full px-4 py-3 rounded-lg bg-gray-50/50 border border-gray-200"
+            required
+          />
         </div>
-      </section>
-    </>
+
+        {/* Message Input */}
+        <div className="space-y-2">
+          <div className="flex items-center gap-2 text-gray-600">
+            <svg
+              className="w-5 h-5"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+            >
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+            </svg>
+            <span className="text-sm">Тілегіңіз</span>
+          </div>
+          <textarea
+            value={newComment}
+            onChange={(e) => setNewComment(e.target.value)}
+            placeholder="Жас жұптарға тілегіңізді жазыңыз..."
+            className="w-full px-4 py-3 rounded-lg bg-gray-50/50 border border-gray-200 h-32 resize-none"
+            required
+          />
+        </div>
+      </div>
+
+      {/* Submit Button */}
+      <div className="flex items-center gap-2 p-4 border-t border-gray-100">
+        <button
+          type="submit"
+          className="flex-1 bg-rose-500 text-white px-4 py-3 rounded-lg hover:bg-rose-600 transition-colors flex items-center justify-center gap-2"
+        >
+          <Send className="w-4 h-4" />
+          <span>Тілек жіберу</span>
+        </button>
+      </div>
+    </motion.form>
+  );
+
+  const WishesSlider = (
+    <div className="relative bg-white/50 backdrop-blur-sm p-6 rounded-3xl border border-rose-100 mb-8">
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={currentIndex}
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -10 }}
+          className="space-y-4"
+        >
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 bg-rose-500 rounded-full flex items-center justify-center">
+              <span className="text-white font-medium">
+                {comments[currentIndex]?.userName?.charAt(0)}
+              </span>
+            </div>
+            <div className="flex-1">
+              <h4 className="font-medium text-gray-800">
+                {comments[currentIndex]?.userName}
+              </h4>
+              <span className="text-xs text-gray-500">
+                {comments[currentIndex]?.timestamp
+                  ?.toDate()
+                  .toLocaleDateString()}
+              </span>
+            </div>
+          </div>
+          <p className="text-gray-600 text-sm leading-relaxed pl-13">
+            {comments[currentIndex]?.comment}
+          </p>
+        </motion.div>
+      </AnimatePresence>
+
+      {comments.length > 1 && (
+        <div className="absolute -bottom-4 left-1/2 transform -translate-x-1/2 flex gap-1.5">
+          <button
+            onClick={prevWish}
+            className="p-2 rounded-full bg-white shadow-md hover:bg-gray-50 transition-colors"
+          >
+            <ChevronLeft className="w-4 h-4 text-gray-600" />
+          </button>
+          <button
+            onClick={nextWish}
+            className="p-2 rounded-full bg-white shadow-md hover:bg-gray-50 transition-colors"
+          >
+            <ChevronRight className="w-4 h-4 text-gray-600" />
+          </button>
+        </div>
+      )}
+    </div>
+  );
+
+  return (
+    <section
+      id="wishes"
+      className="min-h-screen relative overflow-hidden py-20"
+    >
+      <div className="max-w-4xl mx-auto mt-8 px-4">
+        <div className="flex items-center justify-between mb-8">
+          <h3 className="text-xl font-medium text-gray-800">Тілектер</h3>
+          <button
+            onClick={() => setIsCommenting(!isCommenting)}
+            className="flex items-center gap-2 text-rose-500 hover:text-rose-600"
+          >
+            <MessageCircle className="w-5 h-5" />
+            <span>Тілек жазу</span>
+          </button>
+        </div>
+
+        {/* Single Wishes Carousel */}
+        {comments.length > 0 && (
+          <div className="relative bg-white/50 backdrop-blur-sm p-8 rounded-2xl border border-rose-100 mb-8">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={currentIndex}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                className="text-center space-y-4"
+              >
+                <h4 className="font-medium text-gray-800 text-xl">
+                  {comments[currentIndex].userName}
+                </h4>
+                <p className="text-gray-600 text-lg italic">
+                  "{comments[currentIndex].comment}"
+                </p>
+                <span className="text-sm text-gray-400">
+                  {comments[currentIndex].timestamp
+                    ?.toDate()
+                    .toLocaleDateString()}
+                </span>
+              </motion.div>
+            </AnimatePresence>
+
+            {comments.length > 1 && (
+              <>
+                <button
+                  onClick={prevWish}
+                  className="absolute left-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-white/80 shadow-lg hover:bg-white transition-colors"
+                >
+                  <ChevronLeft className="w-5 h-5 text-gray-600" />
+                </button>
+                <button
+                  onClick={nextWish}
+                  className="absolute right-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-white/80 shadow-lg hover:bg-white transition-colors"
+                >
+                  <ChevronRight className="w-5 h-5 text-gray-600" />
+                </button>
+              </>
+            )}
+
+            {/* Dots indicators */}
+            <div className="flex justify-center gap-2 mt-6">
+              {comments.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => setCurrentIndex(index)}
+                  className={`w-2 h-2 rounded-full transition-all ${
+                    currentIndex === index ? "bg-rose-500 w-4" : "bg-gray-300"
+                  }`}
+                />
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Comment Form */}
+        <AnimatePresence>
+          {isCommenting && (
+            <motion.div
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: "auto", opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              className="overflow-hidden"
+            >
+              {CommentForm}
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {comments.length === 0 && (
+          <div className="text-center text-gray-500 py-8">
+            Әзірше тілектер жоқ
+          </div>
+        )}
+      </div>
+    </section>
   );
 }

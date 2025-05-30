@@ -16,7 +16,7 @@ export default function Gallery() {
     },
     {
       id: 2,
-      src: "/images/gallery/2.jpg",
+      src: "/images/gallery/2",
       alt: "Той суреті 2",
       description: "Махаббат көрінісі",
     },
