@@ -280,7 +280,7 @@ export default function Hero() {
                   <p className="text-gray-600 font-serif italic">Құрметті</p>
                   <p className="text-gray-700 font-medium">Мырза/Ханым</p>
                   <p className="text-2xl text-rose-600 font-semibold">
-                    {guestName ? guestName : "Нурбек Маратұлы"} "}
+                    {guestName ? guestName : "Нурбек Маратұлы"}
                   </p>
                 </motion.div>
               </div>
