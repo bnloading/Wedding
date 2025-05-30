@@ -1,41 +1,39 @@
 // src/components/bottom-bar/BottomBar.jsx
-import React from 'react';
-import { motion } from 'framer-motion';
+import React from "react";
+import { motion } from "framer-motion";
 import {
   Home,
   CalendarHeart,
   MapPin,
   Gift,
-  MessageCircleHeart
-} from 'lucide-react';
+  MessageCircleHeart,
+} from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const menuItems = [
-  { icon: Home, label: 'Beranda', href: '#home' },
-  { icon: CalendarHeart, label: 'Event', href: '#event' },
-  { icon: MapPin, label: 'Lokasi', href: '#location' },
-  { icon: Gift, label: 'Hadiah', href: '#gifts' },
-  { icon: MessageCircleHeart, label: 'Harapan', href: '#wishes' },
+  { icon: Home, label: "Басты бет", href: "#home" },
+  { icon: CalendarHeart, label: "Іс-шара", href: "#event" },
+  { icon: MapPin, label: "Мекенжай", href: "#location" },
+  // { icon: Gift, label: "Сыйлық", href: "#gifts" },
+  // { icon: MessageCircleHeart, label: "Тілектер", href: "#wishes" },
 ];
 
 /**
- * BottomBar is a React functional component that renders a fixed bottom navigation bar.
+ * BottomBar - төменгі навигациялық панельді көрсететін React функционалдық компоненті.
  *
- * This component uses Framer Motion to animate its entrance, providing smooth transitions
- * for opacity and vertical movement. It displays a navigational menu with items that change
- * appearance based on the active state. The component maps through a list of menu items, each
- * containing an icon and a label, and applies interactive animations such as hover and tap
- * effects. The active menu item is highlighted by updating text color and background styles.
+ * Бұл компонент кіру анимациясы үшін Framer Motion қолданады, мөлдірлік және
+ * тік қозғалыс үшін біркелкі өтулерді қамтамасыз етеді. Ол белсенді күйге байланысты
+ * көрінісін өзгертетін навигациялық мәзір элементтерін көрсетеді.
  *
  * @component
  * @example
- * // Basic usage:
+ * // Қолдану үлгісі:
  * <BottomBar />
  *
- * @returns {JSX.Element} A JSX element containing the animated bottom navigation bar.
+ * @returns {JSX.Element} Анимацияланған төменгі навигациялық панельді қамтитын JSX элементі.
  */
 const BottomBar = () => {
-  const [active, setActive] = React.useState('home');
+  const [active, setActive] = React.useState("home");
 
   return (
     <motion.div
@@ -69,12 +67,14 @@ const BottomBar = () => {
                     : "stroke-gray-600"
                 )}
               />
-              <span className={cn(
-                "text-[10px] sm:text-xs font-medium transition-all duration-200 line-clamp-1",
-                active === item.label.toLowerCase()
-                  ? "scale-105 text-rose-500"
-                  : "scale-100"
-              )}>
+              <span
+                className={cn(
+                  "text-[10px] sm:text-xs font-body tracking-wide font-medium transition-all duration-200 line-clamp-1",
+                  active === item.label.toLowerCase()
+                    ? "scale-105 text-rose-500 font-semibold"
+                    : "scale-100"
+                )}
+              >
                 {item.label}
               </span>
             </motion.a>
