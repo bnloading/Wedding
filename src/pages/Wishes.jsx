@@ -17,6 +17,7 @@ export default function Wishes() {
   const [newComment, setNewComment] = useState("");
   const [userName, setUserName] = useState("");
   const [isCommenting, setIsCommenting] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Subscribe to real-time updates
   useEffect(() => {
@@ -48,6 +49,7 @@ export default function Wishes() {
       return;
     }
 
+    setIsSubmitting(true);
     try {
       await addDoc(collection(db, "wishes"), {
         userName: userName.trim(),
@@ -62,6 +64,8 @@ export default function Wishes() {
     } catch (error) {
       console.error("Error adding wish:", error);
       alert("Қате шықты. Қайталап көріңіз.");
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -122,10 +126,17 @@ export default function Wishes() {
       <div className="flex items-center gap-2 p-4 border-t border-gray-100">
         <button
           type="submit"
-          className="flex-1 bg-rose-500 text-white px-4 py-3 rounded-lg hover:bg-rose-600 transition-colors flex items-center justify-center gap-2"
+          disabled={isSubmitting}
+          className="flex-1 bg-rose-500 text-white px-4 py-3 rounded-lg hover:bg-rose-600 transition-colors flex items-center justify-center gap-2 disabled:opacity-50"
         >
-          <Send className="w-4 h-4" />
-          <span>Тілек жіберу</span>
+          {isSubmitting ? (
+            <span>Жіберілуде...</span>
+          ) : (
+            <>
+              <Send className="w-4 h-4" />
+              <span>Тілек жіберу</span>
+            </>
+          )}
         </button>
       </div>
     </motion.form>
