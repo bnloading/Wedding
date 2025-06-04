@@ -297,8 +297,8 @@ export default function Hero() {
                 >
                   <p className="text-gray-500 font-montserrat">Құрметті</p>
                   <p className="text-gray-700 font-montserrat  text-lg">
-                    Қадірлі ағайын, ардақты туыс, қадірменді дос-жаран!
-                    <br /> құда - жекжат көрші әріптестер
+                    Құрметті қадірлі ағайын, ардақты туыс, қадірменді дос -
+                    жаран, құда-жекжат, көрші, әріптестер!
                   </p>
                   <p className="text-2xl text-rose-600 font-cormorant font-semibold">
                     {guestName ? guestName : ""}
