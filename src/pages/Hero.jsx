@@ -25,6 +25,7 @@ export default function Hero() {
 
   const CountdownTimer = ({ targetDate }) => {
     const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
+
     function calculateTimeLeft() {
       const difference = +new Date(targetDate) - +new Date();
       let timeLeft = {};
@@ -32,13 +33,14 @@ export default function Hero() {
       if (difference > 0) {
         timeLeft = {
           күн: Math.floor(difference / (1000 * 60 * 60 * 24)),
-          сағат: Math.floor((difference / (1000 * 60 * 60)) % 24),
-          минут: Math.floor((difference / 1000 / 60) % 60),
-          секунд: Math.floor((difference / 1000) % 60),
+          сағ: Math.floor((difference / (1000 * 60 * 60)) % 24),
+          мин: Math.floor((difference / 1000 / 60) % 60),
+          сек: Math.floor((difference / 1000) % 60),
         };
       }
       return timeLeft;
     }
+
     useEffect(() => {
       const timer = setInterval(() => {
         setTimeLeft(calculateTimeLeft());
@@ -47,19 +49,25 @@ export default function Hero() {
     }, [targetDate]);
 
     return (
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-8">
-        {Object.keys(timeLeft).map((interval) => (
-          <motion.div
-            key={interval}
-            initial={{ scale: 0.5, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            className="flex flex-col items-center p-3 bg-white/80 backdrop-blur-sm rounded-xl border border-rose-100"
-          >
-            <span className="text-xl sm:text-2xl font-bold text-rose-600">
-              {timeLeft[interval]}
-            </span>
-            <span className="text-xs text-gray-500 capitalize">{interval}</span>
-          </motion.div>
+      <div className="flex justify-center items-center space-x-2 mt-8 w-full overflow-x-auto">
+        {Object.entries(timeLeft).map(([interval, value], index) => (
+          <div key={interval} className="flex items-center">
+            <motion.div
+              initial={{ scale: 0.5, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              className="flex flex-col items-center p-2 bg-white/80 backdrop-blur-sm rounded-lg border border-rose-100 min-w-[60px]"
+            >
+              <span className="text-lg sm:text-xl font-bold text-rose-600">
+                {String(value).padStart(2, "0")}
+              </span>
+              <span className="text-[10px] sm:text-xs text-gray-500 capitalize">
+                {interval}
+              </span>
+            </motion.div>
+            {index < Object.entries(timeLeft).length - 1 && (
+              <span className="mx-1 text-rose-400">:</span>
+            )}
+          </div>
         ))}
       </div>
     );

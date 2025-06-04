@@ -1,7 +1,7 @@
-import EventCards from "@/components/EventsCard";
-import config from "@/config/config";
 import { motion } from "framer-motion";
 import { Heart } from "lucide-react";
+import EventCards from "@/components/EventsCard";
+import config from "@/config/config";
 
 export default function Events() {
   return (
@@ -28,7 +28,7 @@ export default function Events() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.2 }}
-              className="inline-block text-rose-500 font-medium mb-2"
+              className="inline-block text-rose-500 font-cormorant text-lg tracking-wide mb-2"
             >
               Маңызды күнді белгілеңіз
             </motion.span>
@@ -38,7 +38,7 @@ export default function Events() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.3 }}
-              className="text-4xl md:text-5xl font-serif text-gray-800 leading-tight"
+              className="text-4xl md:text-5xl font-cormorant font-semibold text-gray-800 leading-tight tracking-wide"
             >
               Той салтанатының бағдарламасы
             </motion.h2>
@@ -48,7 +48,7 @@ export default function Events() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.4 }}
-              className="text-gray-500 max-w-md mx-auto"
+              className="text-gray-500 max-w-md mx-auto font-montserrat text-base leading-relaxed"
             >
               Біз сіздерді махаббат жолымыздың басталуының куәгері болуға
               шақырамыз
