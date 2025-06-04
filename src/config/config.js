@@ -57,8 +57,8 @@ const config = {
     shareImages: {
       ogImage: "/images/og-share.jpg",
       thumbnail: "/images/thumbnail.jpg",
-      couplePhoto: "/images/gallery/2.jpg", // Changed from relative to absolute path
-      banner: "/images/2.jpg", // Changed from relative to absolute path
+      couplePhoto: "/images/gallery/12.jpeg", // Changed from relative to absolute path
+      banner: "/images/12.jpeg", // Changed from relative to absolute path
     },
   },
 };

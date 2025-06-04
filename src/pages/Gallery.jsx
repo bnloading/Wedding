@@ -10,13 +10,13 @@ export default function Gallery() {
   const images = [
     {
       id: 1,
-      src: "/images/gallery/2.jpg",
+      src: "/images/gallery/12.jpeg",
       alt: "Той суреті 1",
       description: "Бақытты сәт",
     },
     {
       id: 2,
-      src: "/images/gallery/2.jpg",
+      src: "/images/gallery/12.jpeg",
       alt: "Той суреті 2",
       description: "Махаббат көрінісі",
     },
