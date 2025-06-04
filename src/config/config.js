@@ -17,14 +17,14 @@ const config = {
     ogImage: "/images/og-image.jpg",
     favicon: "/images/favicon.ico",
     agenda: [
-      {
-        title: "Неке қию рәсімі",
-        date: "2025-06-29",
-        startTime: "16:00",
-        endTime: "18:00",
-        location: "Хан сарайы",
-        address: "Республика көшесі, 155, Қосшы, 050400",
-      },
+      // {
+      //   title: "Неке қию рәсімі",
+      //   date: "2025-06-29",
+      //   startTime: "16:00",
+      //   endTime: "18:00",
+      //   location: "Хан сарайы",
+      //   address: "Республика көшесі, 155, Қосшы, 050400",
+      // },
       {
         title: "Той",
         date: "2025-06-29",
