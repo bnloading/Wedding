@@ -35,7 +35,7 @@ const config = {
       },
     ],
     audio: {
-      src: "/audio/toi.mp3",
+      src: "/audio/toi2.mp3",
       title: "Көңілді әуен",
       autoplay: true,
       loop: true,
