@@ -1,39 +1,38 @@
 // Nanti convert ke Bahasa Indonesia
 const config = {
   data: {
-    title: "Айдос & Айым той салтанаты",
+    title: "Жандос & Айнагүл той салтанаты",
     description:
       "Біз үйленеміз және сізді осы қуанышты сәтті бізбен бірге тойлауға шақырамыз.",
-    groomName: "Айдос",
-    brideName: "Айым",
+    groomName: "Жандос",
+    brideName: "Айнагүл",
     parentGroom: "Күйеу жігіттің әкесі & Күйеу жігіттің анасы",
     parentBride: "Қалыңдықтың әкесі & Қалыңдықтың анасы",
-    date: "2024-12-24",
-    maps_url:
-      "https://www.google.com/maps/place/The+Ritz-Carlton+Almaty/@43.2342947,76.9288173,17z/data=!3m1!4b1!4m9!3m8!1s0x388369c4bb4c364b:0x5e83e0d095f28531!5e0!3m2!1sen!2skz!4v1653388145779!5m2!1sen!2skz",
+    date: "2025-06-29", // Changed to June 29
+    maps_url: "https://maps.app.goo.gl/dkKFTNR6PcJGg6Mt8",
     maps_embed:
-      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2906.8894565949856!2d76.92881731535273!3d43.23429397913861!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x388369c4bb4c364b%3A0x5e83e0d095f28531!2sRitz-Carlton%20Almaty!5e0!3m2!1sen!2skz!4v1653388145779!5m2!1sen!2skz",
-    time: "16:16 - 17:30",
-    location: "Салтанат сарайы, Rixos қонақ үйі",
-    address: "Сәтбаев көшесі 29/6, Алматы қ.",
+      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2501.5972040213146!2d71.35835867692391!3d51.17927583481283!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x424585a605525605%3A0x4dff4a1973310b80!2sAkim%20Kosshi!5e0!3m2!1sen!2skz!4v1709715238040!5m2!1sen!2skz",
+    time: "16:00",
+    location: "Хан сарайы",
+    address: "Улица Республики, 155, Қосшы",
     ogImage: "/images/og-image.jpg",
     favicon: "/images/favicon.ico",
     agenda: [
       {
         title: "Неке қию рәсімі",
-        date: "2024-12-24",
-        startTime: "16:16",
+        date: "2025-06-29",
+        startTime: "16:00",
         endTime: "17:30",
-        location: "Салтанат сарайы, Rixos қонақ үйі",
-        address: "Сәтбаев көшесі 29/6, Алматы қ.",
+        location: "Хан сарайы",
+        address: "Улица Республикасы, 155, Қосшы",
       },
       {
         title: "Той",
-        date: "2024-12-24",
-        startTime: "16:16",
+        date: "2025-06-29",
+        startTime: "16:00",
         endTime: "17:30",
-        location: "Салтанат сарайы, Rixos қонақ үйі",
-        address: "Сәтбаев көшесі 29/6, Алматы қ.",
+        location: "Хан сарайы",
+        address: "Улица Республикасы, 155, Қосшы",
       },
     ],
     audio: {
@@ -46,12 +45,12 @@ const config = {
       {
         bank: "Қазақстан Халық Банкі",
         accountNumber: "KZ1234567890",
-        accountName: "Айдос & Айым",
+        accountName: "Жандос & Айнагүл",
       },
       {
         bank: "Kaspi Bank",
         accountNumber: "KZ0987654321",
-        accountName: "Айдос & Айым",
+        accountName: "Жандос & Айнагүл",
       },
     ],
 

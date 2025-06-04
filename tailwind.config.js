@@ -22,6 +22,10 @@ export default {
         body: ["Inter", "sans-serif"],
         decorative: ["Great Vibes", "cursive"],
         arabic: ["Noto Sans Arabic", "sans-serif"],
+        playfair: ["Playfair Display", "serif"],
+        cormorant: ["Cormorant Garamond", "serif"],
+        montserrat: ["Montserrat", "sans-serif"],
+        messiri: ["El Messiri", "sans-serif"],
       },
       colors: {
         background: "hsl(var(--background))",

@@ -61,9 +61,9 @@ const LandingPage = ({ onOpenInvitation }) => (
             className="text-center space-y-4"
           >
             <div className="space-y-2">
-              <h1 className="text-3xl sm:text-4xl md:text-5xl font-serif text-gray-800 leading-tight">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl font-messiri text-gray-800 leading-tight">
                 {config.data.groomName}
-                <span className="text-rose-400 mx-2 sm:mx-3">&</span>
+                <span className="text-rose-400 mx-2 sm:mx-2">&</span>
                 {config.data.brideName}
               </h1>
               <div className="h-px w-16 sm:w-24 mx-auto bg-rose-200" />

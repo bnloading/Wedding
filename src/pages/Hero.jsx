@@ -1,5 +1,5 @@
-import { Calendar, Clock, Heart } from "lucide-react";
 import { motion } from "framer-motion";
+import { Heart, Calendar, Clock } from "lucide-react";
 import { useEffect, useState } from "react";
 import config from "@/config/config";
 import { formatEventDate } from "@/lib/formatEventDate";
@@ -145,6 +145,8 @@ export default function Hero() {
           transition={{ duration: 0.8 }}
           className="space-y-8 relative z-10 w-full max-w-4xl mx-auto"
         >
+          {/* Add family name before the couple's photo */}
+
           {/* Couple's Photo with Gallery */}
           <motion.div
             initial={{ scale: 0.8, opacity: 0 }}
@@ -153,12 +155,12 @@ export default function Hero() {
             className="relative"
           >
             {/* Main Photo */}
-            <div className="relative mx-auto w-64 h-64 sm:w-80 sm:h-80 rounded-full overflow-hidden border-8 border-white shadow-2xl group cursor-pointer">
+            <div className="relative mx-auto w-70 h-70 sm:w-80 sm:h-80 rounded-full overflow-hidden border-8 border-white shadow-2xl group cursor-pointer">
               <div className="absolute inset-0 bg-gradient-to-b from-transparent to-rose-500/20 group-hover:opacity-75 transition-opacity" />
               <motion.img
                 src={config.data.shareImages.couplePhoto}
                 alt={`${config.data.groomName} & ${config.data.brideName}`}
-                className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
+                className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-900 "
                 loading="eager"
                 onClick={() =>
                   window.open(config.data.shareImages.couplePhoto, "_blank")
@@ -197,11 +199,11 @@ export default function Hero() {
           >
             <span className="absolute inset-0 bg-rose-200 blur-md opacity-50" />
             <span className="relative px-6 py-2 text-sm bg-rose-50 text-rose-600 rounded-full border border-rose-200 shadow-sm">
-              Маңызды күнді белгілеңіз
+              Біздің бақытты күнімізбен бөлісіңіз!
             </span>
           </motion.div>
 
-          {/* Names and Message */}
+          {/* Names and Message section with updated font */}
           <div className="space-y-4">
             <motion.p
               initial={{ opacity: 0 }}
@@ -215,7 +217,7 @@ export default function Hero() {
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ delay: 0.6 }}
-              className="text-4xl sm:text-6xl font-serif bg-clip-text text-transparent bg-gradient-to-r from-rose-600 to-pink-600 leading-relaxed"
+              className="text-4xl sm:text-6xl font-cormorant bg-clip-text text-transparent bg-gradient-to-r from-rose-600 to-pink-600 leading-relaxed tracking-wide font-semibold"
             >
               {config.data.groomName}
               <span className="inline-block mx-4">
@@ -227,6 +229,14 @@ export default function Hero() {
               {config.data.brideName}
             </motion.h2>
           </div>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.3 }}
+            className="text-2xl sm:text-3xl font-messiri text-rose-600 mb-4"
+          >
+            Той иелері: Төлеу әулеті
+          </motion.div>
 
           {/* Event Details Card */}
           <motion.div
@@ -252,7 +262,7 @@ export default function Hero() {
                     className="flex items-center justify-center space-x-3"
                   >
                     <Calendar className="w-5 h-5 text-rose-500" />
-                    <span className="text-gray-800 font-medium">
+                    <span className="text-gray-800 font-montserrat">
                       {formatEventDate(config.data.date, "full")}
                     </span>
                   </motion.div>
@@ -264,7 +274,7 @@ export default function Hero() {
                     className="flex items-center justify-center space-x-3"
                   >
                     <Clock className="w-5 h-5 text-rose-500" />
-                    <span className="text-gray-800 font-medium">
+                    <span className="text-gray-800 font-montserrat">
                       {config.data.time}
                     </span>
                   </motion.div>
@@ -277,10 +287,12 @@ export default function Hero() {
                   transition={{ delay: 1.1 }}
                   className="space-y-2 py-4"
                 >
-                  <p className="text-gray-600 font-serif italic">Құрметті</p>
-                  <p className="text-gray-700 font-medium">Мырза/Ханым</p>
-                  <p className="text-2xl text-rose-600 font-semibold">
-                    {guestName ? guestName : "Нурбек Маратұлы"}
+                  <p className="text-gray-600 font-montserrat">Құрметті</p>
+                  <p className="text-gray-700 font-messiri text-lg">
+                    Мырза/Ханым
+                  </p>
+                  <p className="text-2xl text-rose-600 font-cormorant font-semibold">
+                    {guestName ? guestName : ""}
                   </p>
                 </motion.div>
               </div>
