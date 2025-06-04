@@ -108,11 +108,6 @@ export default function Location() {
                     </p>
                   </div>
 
-                  <div className="flex items-center space-x-4">
-                    <Clock className="w-5 h-5 text-rose-500" />
-                    <p className="text-gray-600">{config.data.time}</p>
-                  </div>
-
                   {/* Action Button - Full Width */}
                   <div className="pt-4">
                     <motion.a
