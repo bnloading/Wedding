@@ -9,9 +9,9 @@ const config = {
     parentGroom: "Күйеу жігіттің әкесі & Күйеу жігіттің анасы",
     parentBride: "Қалыңдықтың әкесі & Қалыңдықтың анасы",
     date: "2025-06-29", // Changed to June 29
-    maps_url: "https://maps.google.com/?q=Khan+Saraiy+Kosshy+Akmola+Region",
+    maps_url: "https://2gis.kz/astana/firm/70000001088027861",
     maps_embed:
-      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2501.5972040213146!2d71.3583587!3d51.1792758!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x424585a605525605%3A0xcf12a4a4d44cd7e9!2sKhan%20Saraiy!5e0!3m2!1sen!2skz!4v1709720001234!5m2!1sen!2skz",
+      "https://widgets.2gis.com/widget?type=firmcard&options=%7B%22position%22%3A%7B%22lat%22%3A50.956267%2C%22lon%22%3A71.348615%2C%22zoom%22%3A16%7D%2C%22firmId%22%3A%2270000001088027861%22%2C%22width%22%3A%22100%25%22%2C%22height%22%3A%22400%22%7D",
     location: "Хан сарайы",
     address: "Республика көшесі, 155, Қосшы, 050400",
     ogImage: "/images/og-image.jpg",

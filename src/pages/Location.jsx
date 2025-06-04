@@ -10,6 +10,23 @@ import {
 import { motion } from "framer-motion";
 import { formatEventDate } from "@/lib/formatEventDate";
 
+const Map = () => {
+  return (
+    <div className="relative w-full h-full">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2501.5972040213146!2d71.35835867692391!3d51.17927583481283!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x424585a605525605%3A0x4dff4a1973310b80!2sKhan%20Saraiy!5e0!3m2!1sen!2skz!4v1709720001234!5m2!1sen!2skz"
+        style={{ border: 0 }}
+        width="100%"
+        height="100%"
+        className="w-full h-[400px] rounded-xl"
+        allowFullScreen
+        loading="lazy"
+        referrerPolicy="no-referrer-when-downgrade"
+      />
+    </div>
+  );
+};
+
 export default function Location() {
   return (
     <>
@@ -66,18 +83,9 @@ export default function Location() {
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
-              className="w-full h-[400px] rounded-2xl overflow-hidden shadow-lg border-8 border-white"
+              className="w-full h-[400px] rounded-2xl overflow-hidden shadow-lg border-8 border-white bg-white"
             >
-              <iframe
-                src={config.data.maps_embed}
-                width="100%"
-                height="100%"
-                style={{ border: 0 }}
-                allowFullScreen=""
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                className="w-full h-full"
-              ></iframe>
+              <Map />
             </motion.div>
 
             {/* Venue Details */}
