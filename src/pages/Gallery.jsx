@@ -9,18 +9,29 @@ export default function Gallery() {
 
   const images = [
     {
-      id: 1,
-      src: "/images/gallery/12.jpeg",
-      alt: "Той суреті 1",
-      description: "Бақытты сәт",
+      id: 2,
+      src: "/images/Magu/2.jpg",
+      alt: "Той суреті 2",
+      description: "Сурет 2",
     },
     {
-      id: 2,
-      src: "/images/gallery/12.jpeg",
-      alt: "Той суреті 2",
-      description: "Махаббат көрінісі",
+      id: 3,
+      src: "/images/Magu/3.jpg",
+      alt: "Той суреті 3",
+      description: "Сурет 3",
     },
-    // Add more images as needed
+    {
+      id: 4,
+      src: "/images/Magu/4.jpg",
+      alt: "Той суреті 4",
+      description: "Сурет 4",
+    },
+    {
+      id: 5,
+      src: "/images/Magu/5.jpg",
+      alt: "Той суреті 5",
+      description: "Сурет 5",
+    },
   ];
 
   const nextSlide = () => {
@@ -83,7 +94,7 @@ export default function Gallery() {
               <img
                 src={images[currentIndex].src}
                 alt={images[currentIndex].alt}
-                className="w-full h-full object-cover cursor-pointer"
+                className="w-full h-full object-cover cursor-pointer transition-all duration-300"
                 onClick={() => openModal(images[currentIndex])}
               />
               <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/60 to-transparent">
@@ -131,18 +142,12 @@ export default function Gallery() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90"
-            onClick={() => setIsModalOpen(false)}
           >
-            <motion.div
-              initial={{ scale: 0.9 }}
-              animate={{ scale: 1 }}
-              exit={{ scale: 0.9 }}
-              className="relative max-w-5xl w-full"
-            >
+            <motion.div className="relative max-w-5xl w-full">
               <img
                 src={selectedImage.src}
                 alt={selectedImage.alt}
-                className="w-full h-auto rounded-lg"
+                className="w-full h-auto object-cover rounded-lg"
               />
               <button
                 onClick={() => setIsModalOpen(false)}

@@ -1,5 +1,5 @@
-import { motion } from "framer-motion";
-import { Heart, Calendar, Clock } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Heart, Calendar, Clock, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import config from "@/config/config";
 import { formatEventDate } from "@/lib/formatEventDate";
@@ -7,6 +7,7 @@ import { safeBase64 } from "@/lib/base64";
 
 export default function Hero() {
   const [guestName, setGuestName] = useState("");
+  const [isImageModalOpen, setIsImageModalOpen] = useState(false);
 
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
@@ -115,6 +116,40 @@ export default function Hero() {
     );
   };
 
+  const ImageModal = ({ isOpen, onClose, imageSrc }) => {
+    if (!isOpen) return null;
+
+    return (
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        onClick={onClose}
+        className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/90"
+      >
+        <motion.div
+          initial={{ scale: 0.9 }}
+          animate={{ scale: 1 }}
+          exit={{ scale: 0.9 }}
+          className="relative max-w-5xl w-full h-[80vh] flex items-center justify-center"
+          onClick={(e) => e.stopPropagation()}
+        >
+          <img
+            src={imageSrc}
+            alt="Enlarged photo"
+            className="max-h-full max-w-full object-contain rounded-lg"
+          />
+          <button
+            onClick={onClose}
+            className="absolute top-4 right-4 p-2 rounded-full bg-black/50 hover:bg-black/70 text-white transition-colors"
+          >
+            <X className="w-6 h-6" />
+          </button>
+        </motion.div>
+      </motion.div>
+    );
+  };
+
   return (
     <>
       <section
@@ -163,20 +198,16 @@ export default function Hero() {
             className="relative"
           >
             {/* Main Photo */}
-            <div className="relative mx-auto w-70 h-70 sm:w-80 sm:h-80 rounded-full overflow-hidden border-8 border-white shadow-2xl group cursor-pointer">
+            <div
+              className="relative mx-auto w-70 h-70 sm:w-80 sm:h-80 rounded-full overflow-hidden border-8 border-white shadow-2xl group cursor-pointer"
+              onClick={() => setIsImageModalOpen(true)}
+            >
               <div className="absolute inset-0 bg-gradient-to-b from-transparent to-rose-500/20 group-hover:opacity-75 transition-opacity" />
               <motion.img
                 src={config.data.shareImages.couplePhoto}
                 alt={`${config.data.groomName} & ${config.data.brideName}`}
-                className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-900 "
+                className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-300"
                 loading="eager"
-                onClick={() =>
-                  window.open(config.data.shareImages.couplePhoto, "_blank")
-                }
-                onError={(e) => {
-                  console.error("Error loading image:", e);
-                  e.target.src = "../../public/images/gallery/2.jpg";
-                }}
               />
 
               {/* Hover Overlay */}
@@ -241,9 +272,12 @@ export default function Hero() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3 }}
-            className="text-2xl sm:text-3xl font-messiri text-rose-600 mb-4"
+            className="text-2xl sm:text-3xl font-monserrat text-rose-600 mb-4"
           >
-            Той иелері: Төлеу әулеті
+            Той иелері:
+            <br /> Ата-Апасы: <br /> (И.Мажиг) - Р.Манекей <br />
+            Ата-анасы:
+            <br /> М.Абзал - Л.Назигүл
           </motion.div>
 
           {/* Event Details Card */}
@@ -293,9 +327,8 @@ export default function Hero() {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ delay: 1.1 }}
-                  className="space-y-1 py-4"
+                  className="space-y-1 py-1"
                 >
-                  <p className="text-gray-500 font-montserrat">Құрметті</p>
                   <p className="text-gray-700 font-montserrat  text-lg">
                     Құрметті қадірлі ағайын, ардақты туыс, қадірменді дос -
                     жаран, құда-жекжат, көрші, әріптестер!
@@ -313,6 +346,17 @@ export default function Hero() {
 
           <FloatingHearts />
         </motion.div>
+
+        {/* Add the modal component to your JSX */}
+        <AnimatePresence>
+          {isImageModalOpen && (
+            <ImageModal
+              isOpen={isImageModalOpen}
+              onClose={() => setIsImageModalOpen(false)}
+              imageSrc={config.data.shareImages.couplePhoto}
+            />
+          )}
+        </AnimatePresence>
       </section>
     </>
   );

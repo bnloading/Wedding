@@ -1,37 +1,30 @@
 // Nanti convert ke Bahasa Indonesia
 const config = {
   data: {
-    title: "Жандос & Айнагүл той салтанаты",
+    title: "Мархулан & Асемгүл той салтанаты",
     description:
       "Біз үйленеміз және сізді осы қуанышты сәтті бізбен бірге тойлауға шақырамыз.",
-    groomName: "Жандос",
-    brideName: "Айнагүл",
-    parentGroom: "Күйеу жігіттің әкесі & Күйеу жігіттің анасы",
-    parentBride: "Қалыңдықтың әкесі & Қалыңдықтың анасы",
-    date: "2025-06-29", // Changed to June 29
-    maps_url: "https://2gis.kz/astana/firm/70000001088027861",
-    maps_embed:
-      "https://widgets.2gis.com/widget?type=firmcard&options=%7B%22position%22%3A%7B%22lat%22%3A50.956267%2C%22lon%22%3A71.348615%2C%22zoom%22%3A16%7D%2C%22firmId%22%3A%2270000001088027861%22%2C%22width%22%3A%22100%25%22%2C%22height%22%3A%22400%22%7D",
-    location: "Хан сарайы",
-    address: "Республика көшесі, 155, Қосшы, 050400",
+    groomName: "Мархулан",
+    brideName: "Асемгүл",
+    parentGroom: "М.Абзал & Л.Назигүл",
+    parentBride: "И.Мажиг & Р.Манекей",
+    date: "2025-07-02",
+    time: "18:00",
+    location: "Ақтілек тойханасы",
+    address: "Баян Өлгий аймағы, Цэнгэл сумыны",
+    maps_url:
+      "https://maps.google.com/?q=Баян+Өлгий+аймағы+Цэнгэл+сумыны+Ақтілек+тойханасы",
+    maps_embed: `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d22781.706170939775!2d89.13819590227979!3d48.93748030772034!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x5c2a1ab75265fa91%3A0x64afc3a058b4c8a3!2sTsengel%2C+Mongolia!5e0!3m2!1sen!2skz!4v1566305600000`,
     ogImage: "/images/og-image.jpg",
     favicon: "/images/favicon.ico",
     agenda: [
-      // {
-      //   title: "Неке қию рәсімі",
-      //   date: "2025-06-29",
-      //   startTime: "16:00",
-      //   endTime: "18:00",
-      //   location: "Хан сарайы",
-      //   address: "Республика көшесі, 155, Қосшы, 050400",
-      // },
       {
         title: "Той",
-        date: "2025-06-29",
-        startTime: "16:00",
+        date: "2025-07-02",
+        startTime: "18:00",
         endTime: "23:00",
-        location: "Хан сарайы",
-        address: "Республика көшесі, 155, Қосшы, 050400",
+        location: "Ақтілек тойханасы",
+        address: "Цэнгэл сумыны",
       },
     ],
     audio: {
@@ -44,12 +37,12 @@ const config = {
       {
         bank: "Қазақстан Халық Банкі",
         accountNumber: "KZ1234567890",
-        accountName: "Жандос & Айнагүл",
+        accountName: "Мархулан & Асемгүл",
       },
       {
         bank: "Kaspi Bank",
         accountNumber: "KZ0987654321",
-        accountName: "Жандос & Айнагүл",
+        accountName: "Мархулан & Асемгүл",
       },
     ],
 
@@ -57,7 +50,7 @@ const config = {
     shareImages: {
       ogImage: "/images/og-share.jpg",
       thumbnail: "/images/thumbnail.jpg",
-      couplePhoto: "/images/gallery/12.jpeg", // Changed from relative to absolute path
+      couplePhoto: "/images/Magu/1.jpg", // Changed from relative to absolute path
       banner: "/images/12.jpeg", // Changed from relative to absolute path
     },
   },
