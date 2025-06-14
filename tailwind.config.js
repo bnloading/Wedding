@@ -94,15 +94,26 @@ export default {
           "100%": { opacity: "0.05" },
         },
         float: {
-          "0%, 100%": { transform: "translateY(0) translateX(0)" },
-          "50%": { transform: "translateY(-20px) translateX(10px)" },
+          "0%, 100%": { transform: "translateY(0)" },
+          "50%": { transform: "translateY(-20px)" },
         },
       },
       animation: {
         marquee: "marquee var(--duration) infinite linear",
         "marquee-vertical": "marquee-vertical var(--duration) linear infinite",
         "fade-in": "fade-in 2s ease-out",
-        float: "float 15s ease-in-out infinite",
+        float: "float 6s ease-in-out infinite",
+      },
+      backgroundImage: {
+        "floral-pattern": "url('/images/floral-bg.png')",
+        "wedding-pattern":
+          "url('https://www.transparenttextures.com/patterns/wedding-bells.png')",
+        "subtle-pattern":
+          "url('https://www.transparenttextures.com/patterns/subtle-white-feathers.png')",
+        "paper-pattern":
+          "url('https://www.transparenttextures.com/patterns/handmade-paper.png')",
+        "flower-pattern":
+          "url('https://www.transparenttextures.com/patterns/flowers.png')",
       },
     },
   },

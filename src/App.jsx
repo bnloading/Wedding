@@ -43,6 +43,7 @@ import config from "@/config/config";
  */
 function App() {
   const [isInvitationOpen, setIsInvitationOpen] = useState(false);
+
   return (
     <HelmetProvider>
       <Helmet>
@@ -80,17 +81,34 @@ function App() {
 
         {/* Additional Meta Tags */}
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        {/* Custom Fonts */}
+        <link
+          href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&display=swap"
+          rel="stylesheet"
+        />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap"
+          rel="stylesheet"
+        />
       </Helmet>
 
-      <AnimatePresence mode="wait">
-        {!isInvitationOpen ? (
-          <LandingPage onOpenInvitation={() => setIsInvitationOpen(true)} />
-        ) : (
-          <Layout>
-            <MainContent />
-          </Layout>
-        )}
-      </AnimatePresence>
+      <div className="min-h-screen bg-gradient-to-b from-rose-50 via-white to-rose-50 relative overflow-hidden">
+        {/* Decorative Background */}
+        <div className="fixed inset-0 bg-[url('/images/bg-pattern.png')] opacity-5 pointer-events-none" />
+        <div className="fixed top-0 right-0 w-1/3 h-1/3 bg-gradient-to-b from-rose-200/20 to-transparent rounded-full blur-3xl transform translate-x-1/4 -translate-y-1/4" />
+        <div className="fixed bottom-0 left-0 w-1/3 h-1/3 bg-gradient-to-t from-pink-200/20 to-transparent rounded-full blur-3xl transform -translate-x-1/4 translate-y-1/4" />
+
+        <AnimatePresence mode="wait">
+          {!isInvitationOpen ? (
+            <LandingPage onOpenInvitation={() => setIsInvitationOpen(true)} />
+          ) : (
+            <Layout>
+              <MainContent />
+            </Layout>
+          )}
+        </AnimatePresence>
+      </div>
     </HelmetProvider>
   );
 }
