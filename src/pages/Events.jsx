@@ -99,6 +99,17 @@ export default function Events() {
             >
               Маңызды күнді белгілеңіз
             </motion.span>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.3 }}
+              className="text-2xl sm:text-3xl font-monserrat text-rose-600 mb-4"
+            >
+              <h1 className="font-Toy text-4xl">Той иелері:</h1>
+              <br /> Әкесі: Өмірбек
+              <br />
+              Анасы: Алтынгүл
+            </motion.div>
 
             <motion.h2
               initial={{ opacity: 0, y: 20 }}

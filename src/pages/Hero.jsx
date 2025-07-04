@@ -241,44 +241,11 @@ export default function Hero() {
               Біздің бақытты күнімізбен бөлісіңіз!
             </span>
           </motion.div>
+          <h1 className="font-custom text-3xl text-gray-700">
+            Құрметті қонақтар!
+          </h1>
 
           {/* Names and Message section with updated font */}
-          <div className="space-y-4">
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.4 }}
-              className="text-gray-500 font-arabic text-lg sm:text-xl"
-            >
-              ﷽
-            </motion.p>
-            <motion.h2
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ delay: 0.6 }}
-              className="text-x sm:text-4xl font-Toy bg-clip-text text-transparent bg-gradient-to-r from-rose-600 to-pink-600 leading-relaxed tracking-wide font-semibold"
-            >
-              {config.data.groomName}
-              <span className="inline-block mx-4">
-                <Heart
-                  className="w-8 h-8 sm:w-12 sm:h-12 text-rose-400 inline"
-                  fill="currentColor"
-                />
-              </span>
-              {config.data.brideName}
-            </motion.h2>
-          </div>
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.3 }}
-            className="text-2xl sm:text-3xl font-monserrat text-rose-600 mb-4"
-          >
-            <h1 className="font-Toy text-4xl">Той иелері:</h1>
-            <br /> Әкесі: Өмірбек
-            <br />
-            Анасы: Алтынгүл
-          </motion.div>
 
           {/* Event Details Card */}
           <motion.div
@@ -296,31 +263,6 @@ export default function Hero() {
 
               <div className="space-y-6 text-center">
                 {/* Date and Time */}
-                <div className="space-y-3">
-                  <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 0.9 }}
-                    className="flex items-center justify-center space-x-3"
-                  >
-                    <Calendar className="w-5 h-5 text-rose-500" />
-                    <span className="text-gray-800 font-montserrat">
-                      {formatEventDate(config.data.date, "full")}
-                    </span>
-                  </motion.div>
-
-                  <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 1 }}
-                    className="flex items-center justify-center space-x-3"
-                  >
-                    <Clock className="w-5 h-5 text-rose-500" />
-                    <span className="text-gray-800 font-montserrat">
-                      {config.data.time}
-                    </span>
-                  </motion.div>
-                </div>
 
                 {/* Guest Section */}
                 <motion.div
@@ -330,14 +272,24 @@ export default function Hero() {
                   className="space-y-1 py-1"
                 >
                   <p className="text-gray-700 font-montserrat  text-lg">
-                    <h1 className="font-custom text-3xl">Құрметті қонақтар!</h1>
-                    <br />
                     Cіздерді балаларымыз
-                    <br />
-                    <h1 className="font-Toy text-2xl  font-semibold">
-                      {`${config.data.groomName} мен ${config.data.brideName}`}
-                    </h1>
-                    <br />
+                    <div className="space-y-4">
+                      <motion.h2
+                        initial={{ scale: 0.8, opacity: 0 }}
+                        animate={{ scale: 1, opacity: 1 }}
+                        transition={{ delay: 0.6 }}
+                        className="text-x sm:text-4xl font-Toy bg-clip-text text-transparent bg-gradient-to-r from-rose-600 to-pink-600 leading-relaxed tracking-wide font-semibold"
+                      >
+                        {config.data.groomName}
+                        <span className="inline-block mx-4">
+                          <Heart
+                            className="w-8 h-8 sm:w-12 sm:h-12 text-rose-400 inline"
+                            fill="currentColor"
+                          />
+                        </span>
+                        {config.data.brideName}
+                      </motion.h2>
+                    </div>
                     Үйлену тойына арналған салтанатты дастарханымыздың қадірлі
                     қонағы болуға шақырамыз!
                   </p>
