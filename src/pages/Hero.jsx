@@ -274,7 +274,10 @@ export default function Hero() {
             transition={{ delay: 0.3 }}
             className="text-2xl sm:text-3xl font-monserrat text-rose-600 mb-4"
           >
-            Той иелері: Әкесі Өмірбек , Анасы Алтынгүл
+            <h1 className="font-Toy text-4xl">Той иелері:</h1>
+            <br /> Әкесі: Өмірбек
+            <br />
+            Анасы: Алтынгүл
           </motion.div>
 
           {/* Event Details Card */}
@@ -327,8 +330,16 @@ export default function Hero() {
                   className="space-y-1 py-1"
                 >
                   <p className="text-gray-700 font-montserrat  text-lg">
-                    Құрметті қадірлі ағайын, ардақты туыс, қадірменді дос -
-                    жаран, құда-жекжат, көрші, әріптестер!
+                    <h1 className="font-custom text-3xl">Құрметті қонақтар!</h1>
+                    <br />
+                    Cіздерді балаларымыз
+                    <br />
+                    <h1 className="font-Toy text-2xl  font-semibold">
+                      {`${config.data.groomName} мен ${config.data.brideName}`}
+                    </h1>
+                    <br />
+                    Үйлену тойына арналған салтанатты дастарханымыздың қадірлі
+                    қонағы болуға шақырамыз!
                   </p>
                   <p className="text-2xl text-rose-600 font-cormorant font-semibold">
                     {guestName ? guestName : ""}

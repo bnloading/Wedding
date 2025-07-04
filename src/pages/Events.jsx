@@ -2,12 +2,79 @@ import { motion } from "framer-motion";
 import { Heart } from "lucide-react";
 import EventCards from "@/components/EventsCard";
 import config from "@/config/config";
+import { useState } from "react";
+
+// Custom Calendar Component
+const CustomCalendar = ({ markedDate = 3 }) => {
+  const year = 2025;
+  const month = "тамыз";
+  const daysOfWeek = ["дс", "сс", "ср", "бс", "жм", "сн", "жс"];
+  const daysInMonth = 31;
+  const firstDayOfWeek = 5; // August 1st, 2025 is a Friday
+
+  const renderCalendarDays = () => {
+    const days = [];
+
+    // Add empty cells for days before the first day of the month
+    for (let i = 0; i < firstDayOfWeek; i++) {
+      days.push(<div key={`empty-${i}`} className="calendar-day empty"></div>);
+    }
+
+    // Add days of the month
+    for (let day = 1; day <= daysInMonth; day++) {
+      const isMarked = day === markedDate;
+      days.push(
+        <div key={day} className={`calendar-day ${isMarked ? "marked" : ""}`}>
+          {isMarked ? (
+            <div className="flex flex-col items-center">
+              <Heart
+                className="w-4 h-4 text-rose-500 mb-1"
+                fill="currentColor"
+              />
+              <span className="text-xs">{day}</span>
+            </div>
+          ) : (
+            day
+          )}
+        </div>
+      );
+    }
+
+    return days;
+  };
+
+  return (
+    <div className="calendar-container">
+      <div className="calendar-header">
+        <h2 className="font-cormorant text-xl text-rose-700 mb-4">
+          {month} {year} жыл
+        </h2>
+      </div>
+
+      <div className="calendar-grid">
+        {/* Days of week header */}
+        {daysOfWeek.map((day, index) => (
+          <div key={index} className="calendar-day-header">
+            {day}
+          </div>
+        ))}
+
+        {/* Calendar days */}
+        {renderCalendarDays()}
+      </div>
+    </div>
+  );
+};
 
 export default function Events() {
+  const [date] = useState(new Date(2025, 6, 2)); // 2 шілде 2025 (month is 0-indexed)
+
   return (
     <>
-      {/* Іс-шара бөлімі */}
-      <section id="event" className="min-h-screen relative overflow-hidden">
+      <section
+        id="event"
+        className="min-h-screen relative overflow-hidden bg-gradient-to-br from-rose-50 via-white to-pink-50"
+      >
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
@@ -15,7 +82,7 @@ export default function Events() {
           transition={{ duration: 0.8 }}
           className="relative z-10 container mx-auto px-4 py-20"
         >
-          {/* Бөлім тақырыбы */}
+          {/* Header */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -54,12 +121,25 @@ export default function Events() {
               шақырамыз
             </motion.p>
 
-            {/* Сәндік сызық */}
+            {/* Custom Calendar */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.5 }}
+              className="flex justify-center my-8"
+            >
+              <div className="rounded-3xl shadow-xl bg-white/80 p-6 border border-rose-100 backdrop-blur-md">
+                <CustomCalendar markedDate={3} />
+              </div>
+            </motion.div>
+
+            {/* Decorative line with heart */}
             <motion.div
               initial={{ scale: 0 }}
               whileInView={{ scale: 1 }}
               viewport={{ once: true }}
-              transition={{ delay: 0.5 }}
+              transition={{ delay: 0.6 }}
               className="flex items-center justify-center gap-4 mt-6"
             >
               <div className="h-[1px] w-12 bg-rose-200" />
@@ -70,7 +150,7 @@ export default function Events() {
             </motion.div>
           </motion.div>
 
-          {/* Іс-шаралар тізімі */}
+          {/* Event Cards */}
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -82,6 +162,75 @@ export default function Events() {
           </motion.div>
         </motion.div>
       </section>
+
+      {/* Custom Calendar Styles */}
+      <style jsx>{`
+        .calendar-container {
+          max-width: 350px;
+          margin: 0 auto;
+          font-family: inherit;
+        }
+
+        .calendar-grid {
+          display: grid;
+          grid-template-columns: repeat(7, 1fr);
+          gap: 2px;
+        }
+
+        .calendar-day-header {
+          background-color: rgb(244 63 94 / 0.1);
+          padding: 8px;
+          text-align: center;
+          font-weight: 600;
+          font-size: 14px;
+          color: rgb(244 63 94);
+          border-radius: 8px;
+          margin-bottom: 4px;
+        }
+
+        .calendar-day {
+          padding: 8px;
+          text-align: center;
+          min-height: 40px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background-color: white;
+          border-radius: 8px;
+          font-size: 14px;
+          color: rgb(75 85 99);
+          transition: all 0.2s ease;
+        }
+
+        .calendar-day.empty {
+          background-color: transparent;
+        }
+
+        .calendar-day.marked {
+          background-color: rgb(244 63 94 / 0.1);
+          font-weight: bold;
+          color: rgb(244 63 94);
+          border: 2px solid rgb(244 63 94 / 0.3);
+          transform: scale(1.05);
+          animation: heartbeat 1.5s ease-in-out infinite;
+        }
+
+        .calendar-day:hover:not(.empty):not(.marked) {
+          background-color: rgb(244 63 94 / 0.05);
+          cursor: pointer;
+          transform: scale(1.02);
+        }
+
+        @keyframes heartbeat {
+          0%,
+          100% {
+            transform: scale(1.05);
+          }
+          50% {
+            transform: scale(1.1);
+          }
+        }
+      `}</style>
     </>
   );
 }
