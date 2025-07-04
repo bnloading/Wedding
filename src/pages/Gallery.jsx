@@ -10,25 +10,25 @@ export default function Gallery() {
   const images = [
     {
       id: 2,
-      src: "/images/Magu/2.jpg",
+      src: "/images/gallery/12.jpeg",
       alt: "Той суреті 2",
       description: "Сурет 2",
     },
     {
       id: 3,
-      src: "/images/Magu/3.jpg",
+      src: "/images/gallery/12.jpeg",
       alt: "Той суреті 3",
       description: "Сурет 3",
     },
     {
       id: 4,
-      src: "/images/Magu/4.jpg",
+      src: "/images/gallery/12.jpeg",
       alt: "Той суреті 4",
       description: "Сурет 4",
     },
     {
       id: 5,
-      src: "/images/Magu/5.jpg",
+      src: "/images/gallery/12.jpeg",
       alt: "Той суреті 5",
       description: "Сурет 5",
     },

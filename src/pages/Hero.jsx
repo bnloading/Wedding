@@ -199,14 +199,14 @@ export default function Hero() {
           >
             {/* Main Photo */}
             <div
-              className="relative mx-auto w-70 h-70 sm:w-80 sm:h-80 rounded-full overflow-hidden border-8 border-white shadow-2xl group cursor-pointer"
+              className="relative mx-auto w-70 h-70 sm:w-80 sm:h-80 rounded-full overflow-hidden border-8 border-white shadow-2xl group cursor-pointer "
               onClick={() => setIsImageModalOpen(true)}
             >
-              <div className="absolute inset-0 bg-gradient-to-b from-transparent to-rose-500/20 group-hover:opacity-75 transition-opacity" />
+              <div className="absolute inset-0 bg-gradient-to-b from-transparent to-rose-500/20 group-hover:opacity-75 transition-opacity  " />
               <motion.img
                 src={config.data.shareImages.couplePhoto}
                 alt={`${config.data.groomName} & ${config.data.brideName}`}
-                className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-300"
+                className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-300 "
                 loading="eager"
               />
 
@@ -256,7 +256,7 @@ export default function Hero() {
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ delay: 0.6 }}
-              className="text-4xl sm:text-6xl font-cormorant bg-clip-text text-transparent bg-gradient-to-r from-rose-600 to-pink-600 leading-relaxed tracking-wide font-semibold"
+              className="text-x sm:text-4xl font-Toy bg-clip-text text-transparent bg-gradient-to-r from-rose-600 to-pink-600 leading-relaxed tracking-wide font-semibold"
             >
               {config.data.groomName}
               <span className="inline-block mx-4">
@@ -274,10 +274,7 @@ export default function Hero() {
             transition={{ delay: 0.3 }}
             className="text-2xl sm:text-3xl font-monserrat text-rose-600 mb-4"
           >
-            Той иелері:
-            <br /> Ата-Апасы: <br /> (И.Мажиг) - Р.Манекей <br />
-            Ата-анасы:
-            <br /> М.Абзал - Л.Назигүл
+            Той иелері: Әкесі Өмірбек , Анасы Алтынгүл
           </motion.div>
 
           {/* Event Details Card */}

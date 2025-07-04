@@ -92,7 +92,7 @@ const LandingPage = ({ onOpenInvitation }) => (
         {/* Top Image with Gradient - Increased height and adjusted gradient */}
         <div className="relative w-full h-64 sm:h-72 mb-6 rounded-3xl overflow-hidden">
           <div
-            className="absolute inset-0 bg-[url('/images/Magu/5.jpg')] bg-cover bg-center bg-no-repeat scale-105"
+            className="absolute inset-0 bg-[url('/images/gallery/12.jpeg')] bg-cover bg-center bg-no-repeat scale-105"
             style={{
               backgroundPosition: "center 25%",
             }}
@@ -159,7 +159,7 @@ const LandingPage = ({ onOpenInvitation }) => (
               className="text-center space-y-4 my-8"
             >
               <div className="space-y-3">
-                <h1 className="text-4xl sm:text-5xl font-messiri text-gray-800 leading-tight tracking-wide">
+                <h1 className="text-4xl sm:text43xl font-Toy text-gray-800 leading-tight tracking-wide">
                   {config.data.groomName}
                   <motion.span
                     animate={{ scale: [1, 1.2, 1] }}

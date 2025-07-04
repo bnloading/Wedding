@@ -11,6 +11,7 @@ export default {
           "2xl": "1400px",
         },
       },
+
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
@@ -26,6 +27,10 @@ export default {
         cormorant: ["Cormorant Garamond", "serif"],
         montserrat: ["Montserrat", "sans-serif"],
         messiri: ["El Messiri", "sans-serif"],
+        custom: ["CustomFont", "serif"],
+
+        Just: ["justanotherfont", "sans-serif"],
+        Toy: ["KZRosaMarena", "sans-serif"],
       },
       colors: {
         background: "hsl(var(--background))",

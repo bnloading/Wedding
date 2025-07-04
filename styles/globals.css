@@ -4,6 +4,47 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;500;600&display=swap");
 
 /* Add these styles for image interactions */
+@font-face {
+  font-family: "KZAmour";
+  src: url("../public/KZ_Mon_Amour_One.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+.montserrat {
+  font-family: "Montserrat", sans-serif;
+}
+
+@font-face {
+  font-family: "KZMon";
+  src: url("../public/font/KZ_Mon_Amour_One.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "KZRosaMarena";
+  src: url("../public/font/KZ_Mon_Amour_One.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "CustomFont";
+  src: url("../public/font/Ante.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "justanotherfont";
+  src: url("../public/font/Ante.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
 .group:hover .group-hover\:opacity-75 {
   opacity: 0.75;
 }
