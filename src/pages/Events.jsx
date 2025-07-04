@@ -8,7 +8,7 @@ import { useState } from "react";
 const CustomCalendar = ({ markedDate = 3 }) => {
   const year = 2025;
   const month = "тамыз";
-  const daysOfWeek = ["дс", "сс", "ср", "бс", "жм", "сн", "жс"];
+  const daysOfWeek = ["жс", "дс", "сс", "ср", "бс", "жм", "сн"];
   const daysInMonth = 31;
   const firstDayOfWeek = 5; // August 1st, 2025 is a Friday
 
